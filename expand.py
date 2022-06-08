@@ -5,10 +5,11 @@ import random
 from termcolor import colored
 
 
-# reserve lines at the top and bottom for stuff
+# defining some constant numbers that we'll refer to multiple times in this file
 topReserve = 3
 bottomReserve = 6
 
+# for all the hackers out there
 superUserNum1 = 0
 superUserNum2 = 0
 superUserNum3 = 0
@@ -35,7 +36,16 @@ waterStationBkgd = 'on_yellow'
 fireingColor = 'white'
 fireingBkgd = 'on_green'
 
+# This is an object!  Just like def is the keyword that lets you make functions,
+# class is a keyword that lets python know that this is an object.  What that
+# means is you are creating an "object" that can have properties.  In this case
+# waterstation is an object that has a position that is stored in x and y among
+# other things.  Classes are SUPER useful because they allow you to create arbitrary
+# items with multiple properties that can be changed without having to keep track
+# of each individual property yourself.  You'll see how this is used in the code,
+# but this is where you define the object
 class waterstation:
+    # this is how you define what the initial properties of the object are
     def __init__(self,x,y):
         self.x = x
         self.y = y
@@ -44,6 +54,13 @@ class waterstation:
         self.color = waterStationColor
         self.bkgd = waterStationBkgd
 
+    # classes/objects are cool because you can define functions WITHIN the object
+    # itself.  This means that you can use the kill() method on any waterstation
+    # object.  If our waterstation was called ws then if you type ws.kill() in
+    # python then it would set its value of ws.isKilled to 1 and the symbol would
+    # change without you having to type ws.isKilled = 1 in your code directly.
+    # The ability to do this saves tons of time and allows you to do all sorts of
+    # interesting things in your code
     def kill(self):
         self.isKilled = 1
         self.symbol = deadWaterStation
@@ -54,7 +71,7 @@ class submarine:
         self.y = y
         self.flag = flag # zero for user, 1 for AI
         self.detectionRadius = 5
-        self.sonarRadius = 1000
+        self.sonarRadius = 10
         self.isKilled = -1
         self.isRevealed = 1
         self.weaponRange = 5

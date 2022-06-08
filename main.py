@@ -21,11 +21,16 @@ def main():
     # need this for colors to show up in the terminal
     os.system('color')
 
-    # warning to the user
+    # warning to the user, colors don't appear properly in powershell so let
+    # them know to use a different terminal
     print("WARNING: For best experience, do not use PowerShell terminal")
+
+    # this tells python to "sleep" for 1.5 seconds.  These are useful to ensure
+    # the user has time to read a message or for adding dramatic pauses to your
+    # game
     time.sleep(1.5)
 
-    # always start from a clean terminal
+    # always start from a clean terminal, this function is defined in expand.py
     clearScreen()
 
     # show the spash screen first! Always take credit for your work
@@ -33,18 +38,31 @@ def main():
     input("Press Enter to continue...")
 
     # now show the title screen for the game, this is the first time
-    # they'll see options and have thigns to input
+    # they'll see options and have thigns to input.  This function is defined in
+    # storyboarding.py
     userTitleResponse = makeTitleScreen()
 
     # gameState controls what when we exit, but need to map userTitleResponse
-    # to a game state
+    # to a game state.  The getUserInput() function in expand.py for me will
+    # always return the option the user selected as a number value "0,1,2,..."
+    # so I can always use those numbers to decide what to do next
     if userTitleResponse == 2:
+        # in makeTitleScreen() you see if the user chooses to quit that is option
+        # number 2 (remember python list indexes start at 0).  setting gameState
+        # to 0 means we don't start the game (see the while loop below)
         gameState = 0
     else:
+        # if the user selects anything other than option 2 then we start the
+        # game!
         gameState = 1
 
-    # whatToDo should be a number, if it is 0 then we start the game
+    #  This while loop checks every iteration if the user is still playing the
+    # game.  If gameState gets set to 0 at any point then this loop no longer runs
     while (gameState > 0):
+
+        # if we've gotten this far then they're ready to do stuff, the options
+        # from makeTitleScreen() are "Play","How to Play","Quit", and a secret
+        # option (see if you can figure it out)
 
         # if statement, if we want to look at the rules then show them
         if userTitleResponse == 1:
@@ -60,7 +78,12 @@ def main():
 
             # give some cheats
             if userTitleResponse==3:
-                getSuperUserInput(colored("Careful, they be dragons ahead",'red'))
+                # this is the first time you've seen this function, it is from
+                # a package called termcolor which allows us to add colors to
+                # the terminal! colored('text','color') is how you use it
+                # and you'll see it all throughout this code
+                textToShow = colored("Careful, they be dragons ahead",'red')
+                getSuperUserInput(textToShow)
                 username = "Slick_Rick"
                 commandResponse = 0
             else:
